@@ -27,14 +27,19 @@ public class Pedido {
     @OneToOne(cascade = CascadeType.ALL)
     private Cartao cartao;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Endereco endereco;
+
+
     public Pedido() {}
 
-    public Pedido(Long id, Status status, List<ItemPedido> itens, Double valorTotal, Cartao cartao) {
+    public Pedido(Long id, Status status, List<ItemPedido> itens, Double valorTotal, Cartao cartao, Endereco endereco) {
         this.id = id;
         this.status = status;
         this.itens = itens;
         this.valorTotal = valorTotal;
         this.cartao = cartao;
+        this.endereco = endereco;
     }
 
     public Long getId() {
@@ -77,5 +82,12 @@ public class Pedido {
         this.cartao = cartao;
     }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 
 }
