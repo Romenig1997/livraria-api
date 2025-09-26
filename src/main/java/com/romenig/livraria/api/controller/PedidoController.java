@@ -21,8 +21,33 @@ public class PedidoController {
             return pedidoService.todosPedidos();
         }
 
+        @GetMapping("/{id}")
+        public Pedido buscarPorId(@PathVariable Long id){
+            return pedidoService.buscarPorId(id);
+        }
+
         @PostMapping
         public Pedido salvarPedido(@Valid @RequestBody Pedido pedido){
             return pedidoService.salvarPedido(pedido);
+        }
+
+        @PutMapping("/{id}/aprovar")
+        public Pedido aprovarPedido(@PathVariable  Long id){
+            return pedidoService.aprovarPedido(id);
+        }
+
+        @PutMapping("/{id}/enviar")
+        public Pedido enviarPedido(@PathVariable Long id){
+            return pedidoService.enviarPedido(id);
+        }
+
+        @PutMapping("/{id}/concluir")
+        public Pedido concluirPedido(@PathVariable Long id){
+            return  pedidoService.concluirPedido(id);
+        }
+
+        @PutMapping("/{id}/cancelar")
+        public Pedido cancelarPedido(@PathVariable Long id){
+            return pedidoService.cancelarPedido(id);
         }
 }

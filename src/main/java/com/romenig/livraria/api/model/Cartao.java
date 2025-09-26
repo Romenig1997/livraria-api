@@ -7,6 +7,9 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
+
 @Entity
 public class Cartao {
 
@@ -21,8 +24,7 @@ public class Cartao {
     @NotBlank
     private String nome;
 
-    @NotBlank
-    private String validade;
+    private YearMonth validade;
 
     @NotBlank
     @Size(min = 3,max = 3)
@@ -31,7 +33,7 @@ public class Cartao {
     public Cartao() {
     }
 
-    public Cartao(Long id, String numero, String nome, String validade, String cvv) {
+    public Cartao(Long id, String numero, String nome, YearMonth validade, String cvv) {
         this.id = id;
         this.numero = numero;
         this.nome = nome;
@@ -63,11 +65,11 @@ public class Cartao {
         this.nome = nome;
     }
 
-    public String getValidade() {
+    public YearMonth getValidade() {
         return validade;
     }
 
-    public void setValidade(String validade) {
+    public void setValidade(YearMonth validade) {
         this.validade = validade;
     }
 
