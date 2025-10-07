@@ -61,6 +61,9 @@ public class PedidoService {
         // Define o valor total do pedido
         pedido.setValorTotal(total);
 
+        //Todo pedido inicia como aguardando aprovaxão
+        pedido.setStatus(Status.AGUARDANDO_APROVACAO);
+
         // Salva o pedido com todos os itens
         return pedidoRepository.save(pedido);
     }
@@ -78,7 +81,7 @@ public class PedidoService {
             Livro livro = item.getLivro();
             int quantidadeNova = livro.getQuantidade() - item.getQuantidade();
 
-            if (quantidadeNova <= 0){
+            if (quantidadeNova < 0){
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantidade insuficiente" + livro.getNome());
             }
 
@@ -95,7 +98,7 @@ public class PedidoService {
         Pedido pedido = pedidoRepository.findById(idDoPedido).orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pedido não encontrado"));
 
         //Testa caso o status seja diferente do desejado
-        if (pedido.getStatus() != Status.AGUARDANDO_APROVACAO){
+        if (pedido.getStatus() != Status.APROVADO_AGUARDANDO_ENVIO){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pedido não pode ser enviado");
         }
 
@@ -111,7 +114,7 @@ public class PedidoService {
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pedido não pode ser concluído"));
 
         //Testa caso o status seja diferente do desejado
-        if(pedido.getStatus() != Status.AGUARDANDO_APROVACAO){
+        if(pedido.getStatus() != Status.ENVIADO){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pedido não pode ser concluido");
         }
 

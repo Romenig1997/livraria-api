@@ -24,6 +24,12 @@ public class LivroController {
         return livroService.listarTodos();
     }
 
+    @GetMapping("/{id}")
+    public Livro buscarLivroPorId(@PathVariable Long id){
+        return livroService.buscarPorId(id);
+
+    }
+
     //Endpoint para adicionar livro
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

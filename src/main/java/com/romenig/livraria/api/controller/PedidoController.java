@@ -31,6 +31,8 @@ public class PedidoController {
             return pedidoService.salvarPedido(pedido);
         }
 
+        //endpoints de ADM agora
+
         @PutMapping("/{id}/aprovar")
         public Pedido aprovarPedido(@PathVariable  Long id){
             return pedidoService.aprovarPedido(id);
